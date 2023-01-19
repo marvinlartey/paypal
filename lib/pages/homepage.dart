@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:paypal/pages/contacrs.dart';
+import 'package:paypal/pages/home.dart';
+import 'package:paypal/pages/settings.dart';
+import 'package:paypal/pages/wallet.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -20,11 +24,11 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
-  final List<Widget> _list = [
-    Text("data"),
-    Text("fdas"),
-    Text("fasad"),
-    Text("dawqeta"),
+  final List<Widget> pages = [
+    UserHome(),
+    Contacts(),
+    Wallet(),
+    Settings(),
   ];
 
   @override
@@ -32,30 +36,7 @@ class _HomepageState extends State<Homepage> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        body: _list[selectedIndex],
-
-        // TabBarView(
-        //   // controller: _tabController,
-        //   children: [
-        //     CustomScrollView(
-        //       slivers: [
-        //         SliverAppBar(
-        //           automaticallyImplyLeading: false,
-        //           collapsedHeight: 600,
-        //           flexibleSpace: Stack(children: [
-        //             Expanded(
-        //                 child: Container(
-        //               color: Colors.amber,
-        //             ))
-        //           ]),
-        //         ),
-        //       ],
-        //     ),
-        //     const Icon(Icons.directions_car),
-        //     const Icon(Icons.directions_transit),
-        //     const Icon(Icons.directions_bike),
-        //   ],
-        // ),
+        body: pages[selectedIndex],
         bottomNavigationBar: GNav(
           onTabChange: _navigateTab,
           gap: 8,
