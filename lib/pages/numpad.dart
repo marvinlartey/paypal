@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 class NumPad extends StatelessWidget {
   final double buttonSize;
   final Color buttonColor;
-  final Color iconColor;
+  // final Color iconColor;
   final TextEditingController controller;
   final Function delete;
   final Function onSubmit;
 
   const NumPad({
     Key? key,
-    this.buttonSize = 70,
-    this.buttonColor = Colors.indigo,
-    this.iconColor = Colors.amber,
+    this.buttonSize = 75,
+    this.buttonColor = Colors.white,
+    // this.iconColor = Colors.amber,
     required this.delete,
     required this.onSubmit,
     required this.controller,
@@ -23,7 +23,7 @@ class NumPad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 30, right: 30),
+      margin: const EdgeInsets.only(left: 30, right: 30, top: 30),
       child: Column(
         children: [
           const SizedBox(height: 20),
@@ -38,12 +38,14 @@ class NumPad extends StatelessWidget {
                 color: buttonColor,
                 controller: controller,
               ),
+              const Spacer(),
               NumberButton(
                 number: 2,
                 size: buttonSize,
                 color: buttonColor,
                 controller: controller,
               ),
+              const Spacer(),
               NumberButton(
                 number: 3,
                 size: buttonSize,
@@ -62,12 +64,14 @@ class NumPad extends StatelessWidget {
                 color: buttonColor,
                 controller: controller,
               ),
+              const Spacer(),
               NumberButton(
                 number: 5,
                 size: buttonSize,
                 color: buttonColor,
                 controller: controller,
               ),
+              const Spacer(),
               NumberButton(
                 number: 6,
                 size: buttonSize,
@@ -86,12 +90,14 @@ class NumPad extends StatelessWidget {
                 color: buttonColor,
                 controller: controller,
               ),
+              const Spacer(),
               NumberButton(
                 number: 8,
                 size: buttonSize,
                 color: buttonColor,
                 controller: controller,
               ),
+              const Spacer(),
               NumberButton(
                 number: 9,
                 size: buttonSize,
@@ -104,30 +110,62 @@ class NumPad extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // this button is used to delete the last number
-              IconButton(
-                onPressed: () => delete(),
-                icon: Icon(
-                  Icons.backspace,
-                  color: iconColor,
-                ),
-                iconSize: buttonSize,
-              ),
               NumberButton(
                 number: 0,
                 size: buttonSize,
                 color: buttonColor,
                 controller: controller,
               ),
-              // this button is used to submit the entered value
-              IconButton(
-                onPressed: () => onSubmit(),
-                icon: Icon(
-                  Icons.done_rounded,
-                  color: iconColor,
+              const Spacer(),
+
+              SizedBox(
+                width: buttonSize,
+                height: buttonSize,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    primary: Colors.white,
+                    // backgroundColor: color,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(buttonSize / 2),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Center(
+                    child: Text(
+                      ".",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                          fontSize: 30),
+                    ),
+                  ),
                 ),
-                iconSize: buttonSize,
               ),
+              const Spacer(),
+
+              // this button is used to delete the last number
+              SizedBox(
+                width: buttonSize,
+                height: buttonSize,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    primary: Colors.white,
+                    // backgroundColor: color,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(buttonSize / 2),
+                    ),
+                  ),
+                  onPressed: () => delete(),
+                  child: const Icon(
+                    Icons.backspace_outlined,
+                    size: 30,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
             ],
           ),
         ],
@@ -159,6 +197,8 @@ class NumberButton extends StatelessWidget {
       height: size,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          elevation: 0,
+          primary: Colors.white,
           // backgroundColor: color,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(size / 2),
@@ -171,7 +211,7 @@ class NumberButton extends StatelessWidget {
           child: Text(
             number.toString(),
             style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+                fontWeight: FontWeight.w400, color: Colors.black, fontSize: 30),
           ),
         ),
       ),
