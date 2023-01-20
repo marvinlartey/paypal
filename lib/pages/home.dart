@@ -1,4 +1,6 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:paypal/pages/activity.dart';
 
 class UserHome extends StatelessWidget {
   const UserHome({Key? key}) : super(key: key);
@@ -31,7 +33,8 @@ class UserHome extends StatelessWidget {
                     children: const [
                       // SEND MONEY CARD
                       TransferCard(
-                          text: "Send Money", icon: Icons.ios_share_outlined),
+                          text: "Send        Money",
+                          icon: Icons.ios_share_outlined),
                       // RECEIVE MONEY CARD
                       TransferCard(
                         text: "Request Payment",
@@ -48,10 +51,20 @@ class UserHome extends StatelessWidget {
                   ),
                   // SUBTITLE
                   Row(
-                    children: const [
-                      Text("Activity"),
-                      Spacer(),
-                      Text("View All"),
+                    children: [
+                      const Text("Activity"),
+                      const Spacer(),
+                      OpenContainer(
+                        closedElevation: 0,
+                        closedBuilder:
+                            (BuildContext context, void Function() action) {
+                          return const Text("View All");
+                        },
+                        openBuilder: (BuildContext context,
+                            void Function({Object? returnValue}) action) {
+                          return const Activity();
+                        },
+                      ),
                     ],
                   ),
 
@@ -99,14 +112,26 @@ class ActivityTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(Icons.access_alarm),
-      title: Text(name),
-      subtitle: Text(time),
-      trailing: Text(
-        amount,
-        style: TextStyle(color: Colors.green),
-      ),
+    return Column(
+      children: [
+        Material(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          elevation: 1,
+          child: ListTile(
+            leading: const Icon(Icons.access_alarm),
+            title: Text(name),
+            subtitle: Text(time),
+            trailing: Text(
+              amount,
+              style: const TextStyle(color: Colors.green),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 15,
+        )
+      ],
     );
   }
 }
@@ -146,11 +171,18 @@ class TransferCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(icon),
+                Icon(
+                  icon,
+                  color: Colors.white,
+                  size: 30,
+                ),
                 const SizedBox(
                   height: 10,
                 ),
-                Text(text),
+                Text(
+                  text,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ],
             ),
           ),
