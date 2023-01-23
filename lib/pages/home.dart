@@ -13,14 +13,64 @@ class UserHome extends StatelessWidget {
           SliverAppBar(
             automaticallyImplyLeading: false,
             collapsedHeight: MediaQuery.of(context).size.height * 0.3,
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 46, 119, 188),
-                Color.fromARGB(255, 16, 82, 168),
-                Color.fromARGB(255, 19, 75, 163),
-              ])),
-              child: Stack(children: [Expanded(child: Container())]),
+            flexibleSpace: Stack(
+              children: [
+                // Background
+                Container(
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                    Color.fromARGB(255, 46, 119, 188),
+                    Color.fromARGB(255, 16, 82, 168),
+                    Color.fromARGB(255, 19, 75, 163),
+                  ])),
+                  child: Stack(children: [Expanded(child: Container())]),
+                ),
+
+                // foreground
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: const [
+                          Icon(
+                            Icons.autofps_select_sharp,
+                            size: 50,
+                            color: Colors.white,
+                          ),
+                          Spacer(),
+                          CircleAvatar(
+                            backgroundColor: Colors.blue,
+                            radius: 25,
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "Hello, Vadim!",
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w200,
+                            color: Colors.white),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      const Text(
+                        "\$300.32",
+                        style: TextStyle(fontSize: 40, color: Colors.white),
+                      ),
+                      const Text(
+                        "Your Balance",
+                        style: TextStyle(fontSize: 14, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           SliverToBoxAdapter(
@@ -30,19 +80,43 @@ class UserHome extends StatelessWidget {
                 children: [
                   // SEND AND RECEIVE MONEY CARDS
                   Row(
-                    children: const [
+                    children: [
                       // SEND MONEY CARD
-                      TransferCard(
-                          text: "Send        Money",
-                          icon: Icons.ios_share_outlined),
+                      const TransferCard(
+                        text: "Send        Money",
+                        icon: Icons.ios_share_outlined,
+                        background: [
+                          Color.fromARGB(255, 9, 96, 176),
+                          Color.fromARGB(255, 19, 75, 163)
+                        ],
+                        foreground: Colors.white,
+                        elevation: 5,
+                      ),
                       // RECEIVE MONEY CARD
-                      TransferCard(
+                      const TransferCard(
                         text: "Request Payment",
                         icon: Icons.install_mobile_outlined,
+                        background: [
+                          Color.fromARGB(255, 255, 255, 255),
+                          Color.fromARGB(255, 255, 255, 255)
+                        ],
+                        foreground: Color.fromARGB(255, 9, 96, 176),
+                        elevation: 0,
                       ),
                       // MORE OPTIONS
                       Card(
-                        child: Center(child: Icon(Icons.more_vert)),
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: const SizedBox(
+                            width: 50,
+                            height: 130,
+                            child: Center(
+                                child: Icon(
+                              Icons.more_vert,
+                              size: 30,
+                              color: Colors.grey,
+                            ))),
                       )
                     ],
                   ),
@@ -67,7 +141,9 @@ class UserHome extends StatelessWidget {
                       ),
                     ],
                   ),
-
+                  const SizedBox(
+                    height: 10,
+                  ),
                   // ACTIVITY TILES
                   const ActivityTile(
                     amount: "+\$255",
@@ -141,10 +217,16 @@ class TransferCard extends StatelessWidget {
     Key? key,
     required this.text,
     required this.icon,
+    required this.foreground,
+    required this.background,
+    required this.elevation,
   }) : super(key: key);
 
   final String text;
   final IconData icon;
+  final Color foreground;
+  final List<Color> background;
+  final double elevation;
 
   @override
   Widget build(BuildContext context) {
@@ -152,38 +234,38 @@ class TransferCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.all(8),
-      elevation: 5,
+      elevation: elevation,
       color: Colors.blue,
       child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 9, 96, 176),
-              Color.fromARGB(255, 19, 75, 163)
-            ],
-          ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: background),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(15.0),
           child: SizedBox(
             width: 100,
             height: 100,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  text,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    icon,
+                    color: foreground,
+                    size: 30,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    text,
+                    style: TextStyle(
+                      color: foreground,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
