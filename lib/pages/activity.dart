@@ -20,7 +20,7 @@ class Activity extends StatelessWidget {
                 children: const [
                   Icon(
                     Icons.keyboard_backspace_rounded,
-                    size: 40,
+                    size: 35,
                   ),
                   Spacer(),
                   Text(
@@ -30,7 +30,7 @@ class Activity extends StatelessWidget {
                   Spacer(),
                   Icon(
                     Icons.search,
-                    size: 40,
+                    size: 35,
                   )
                 ],
               ),
