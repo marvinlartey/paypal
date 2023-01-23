@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:paypal/pages/contacrs.dart';
+import 'package:paypal/pages/contacts.dart';
 import 'package:paypal/pages/home.dart';
 import 'package:paypal/pages/settings.dart';
 import 'package:paypal/pages/wallet.dart';
@@ -25,10 +23,10 @@ class _HomepageState extends State<Homepage> {
   }
 
   final List<Widget> pages = [
-    UserHome(),
-    Contacts(),
-    Wallet(),
-    Settings(),
+    const UserHome(),
+    const Contacts(),
+    const Wallet(),
+    const Settings(),
   ];
 
   @override

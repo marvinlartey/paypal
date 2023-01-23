@@ -59,6 +59,8 @@ class _SendMoneyState extends State<SendMoney> {
                 TextField(
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600),
                   decoration: InputDecoration(
+                      prefix: Text("\$"),
+                      contentPadding: EdgeInsets.all(10),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20))),
                   showCursor: false,

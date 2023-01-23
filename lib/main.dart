@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:paypal/pages/login_page.dart';
 
-import 'pages/homepage.dart';
-
 void main() {
   runApp(const MyApp());
 }
